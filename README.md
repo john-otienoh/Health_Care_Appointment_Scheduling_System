@@ -15,15 +15,15 @@ The challenge focuses on developing a robust, secure backend service that effici
 * Backend Architecture - Design an efficient and maintainable backend structure with clear component organization. Include sequence diagrams for key processes and a comprehensive database schema diagram.
 * API Design & Documentation - Develop RESTful API endpoints following best practices with proper documentation using Swagger/OpenAPI. Implement meaningful error responses and status codes.
 * Data Modeling - Design a database schema with appropriate relationships between patients, doctors, and appointments. Implement data validation and ensure referential integrity between entities.
-* Security Implementation - Implement authentication and authorization with role-based access controls (OAuth 2.0). 
+* Security Implementation - Implement authentication and authorization with role-based access controls (OAuth 2.0).
 Secure sensitive healthcare information and document your security approach.
 * Error Handling, Performance & Testing - Build comprehensive error handling with proper validation.
-* Performance optimizations including asynchronous processing and message queuing (Kafka/RabbitMQ/Redis). 
+* Performance optimizations including asynchronous processing and message queuing (Kafka/RabbitMQ/Redis).
 **Include thorough test coverage of core functionality.**
 
 ## Technology Stack
 
 * Backend: Python (Django).
-* Frontend: HTML, CSS(bootsrap & Vanilla) and Javascript.
+* Frontend: HTML, CSS(Bootstrap & Vanilla) and Javascript.
 * Database: PostgreSQL.
 * Documentation: Swagger/OpenAPI.
