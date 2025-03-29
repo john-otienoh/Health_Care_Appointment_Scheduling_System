@@ -242,6 +242,48 @@ label{
 .inner-menu-content span{
 font-size: 1.5rem;
 }
+#signup {
+  padding: 100px 0px;
+}
+#signup .slug {
+  text-transform: uppercase;
+  color: #999;
+  text-align: center;
+  margin-bottom: 20px;
+}
+#signup .title {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+#signup .content {
+  max-width: 640px;
+  margin: 0 auto 50px;
+  text-align: center;
+  line-height: 1.5;
+}
+#signup .button-wrapper {
+  text-align: center;
+}
+#signup .button-wrapper button {
+  outline: none;
+  padding: 30px 50px;
+  margin: 0px 20px;
+  text-transform: uppercase;
+  border-radius: 50px;
+  background: white;
+  color: #3ed1cc;
+  border: 2px solid #3ed1cc;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  transition: all ease-in-out 300ms;
+}
+#signup .button-wrapper button:hover {
+  background: #3ed1cc;
+  color: white;
+}
 
 @media (max-width:898px){
   header{
@@ -292,5 +334,23 @@ font-size: 1.5rem;
     .inner-menu-icons i{
         margin-right: 1px;
        
+    }
+    #signup {
+        padding: 20px;
+    }
+    #signup .slug {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    #signup .title {
+        font-size: 30px;
+    }
+    #signup .content {
+        font-size: 14px;
+    }
+    #signup .button-wrapper button {
+        font-size: 12px;
+        padding: 20px 20px;
+        margin: 0px 5px;
     }
 }
