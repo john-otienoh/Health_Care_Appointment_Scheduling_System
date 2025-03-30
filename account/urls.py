@@ -13,7 +13,7 @@ urlpatterns = [
         "login/",
         CustomLoginView.as_view(
             redirect_authenticated_user=True,
-            template_name="users/login.html",
+            template_name="registration/login.html",
             authentication_form=LoginForm,
         ),
         name="login",

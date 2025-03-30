@@ -40,24 +40,35 @@
               </div>
               <div class="form-row">
                 <div class="col-md-6">
-		          <div class="form-group">
-		            <label class="small mb-1">Username</label>
-		            {{ form.username }}
-		          </div>
-		        </div>
+		              <div class="form-group">
+		                <label class="small mb-1">Username</label>
+		                {{ form.username }}
+		              </div>
+		            </div>
                 <div class="col-md-6">
-		          <div class="form-group">
-		            <label class="small mb-1">Email</label>
-		            {{ form.email }}
+                  <div class="form-group">
+                    <label class="small mb-1">Email</label>
+                    {{ form.email }}
+                  </div>
+		            </div>
 		          </div>
-		        </div>
-                <div class="col-md-6">
-		          <div class="form-group">
-		            <label class="small mb-1">Roles</label>
-		            {{ form.roles }}
-		          </div>
-		        </div>
-		      </div>
+              <div class="form-row">
+                <div class="col-md-6"> 
+                    <div class="form-group">
+                        <label class="small mb-1">I am registering as a:</label>
+                        <div class="d-flex flex-column"> 
+                            {% for choice in form.roles %}
+                            <div class="form-check mr-3">
+                                {{ choice.tag }}
+                                <label class="form-check-label" for="{{ choice.id_for_label }}">
+                                    {{ choice.choice_label }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+              </div>
               <div class="form-row">
                   <div class="col-md-6">
                       <div class="form-group">
@@ -73,14 +84,15 @@
                       </div>
                   </div>
               </div>
+              
               <div class="form-group mt-4 mb-0">
-                  <button type="submit" class="col-md-12 btn btn-dark">Sign Up</button><br><br>
+                  <button type="submit" class="col-md-12 btn btn-info">Sign Up</button><br><br>
               </div>
             </form>
           </div>
           <div class="card-footer text-center">
-              <div class="small">
-                  <a href="{% url 'login' %}">Have an account? Go to Sign in</a>
+              <div class="small">Have an account? 
+                  <a href="{% url 'account:login' %}">Go to Sign in</a>
               </div>
           </div>
         </div>

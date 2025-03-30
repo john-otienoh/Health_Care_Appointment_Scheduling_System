@@ -54,17 +54,18 @@ nav a:hover{
   border-bottom: solid var(--clr) 3px;
   color: var(--clr);
 }
-.btn{
+
+ .mybtn {
   display: inline-block;
-  padding: 10px 30px;
+  padding: 3px 10px; 
   background-color: var(--btnclr);
-  color: #fff;
-  border-radius: 10px;
+  color: black;
+  border-radius: 8px;   
   transition: .3s ease;
-  font-size: 20px;
+  font-size: 8px;        
   text-transform: capitalize;
   font-weight: 600;
-
+  line-height: 1.2;      
 }
 #chek{
   display: none;

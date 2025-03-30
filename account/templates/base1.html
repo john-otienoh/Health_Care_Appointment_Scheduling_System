@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{% static 'images/logo.webp' %}" type="image/x-icon">
     <title>{% block title %} {% endblock %} </title>
+    {% block css %}{% endblock %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% comment %} <script src="https://kit.fontawesome.com/9f04172127.js" crossorigin="anonymous"></script> {% endcomment %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </head>
   <body>
@@ -21,67 +23,28 @@
           {% if user.doctor %}
             <a href="{% url 'account:about' %}">appointments</a>
             <a href="{% url 'account:about' %}">profile</a>
-            <a href="{% url 'account:about' %}">prescription</a>          
+            {% comment %} <a href="{% url 'account:about' %}">prescription</a>           {% endcomment %}
           {% endif %}
           {% if user.patient %}
             <a href="{% url 'account:about-us' %}">Your appointments</a>
             <a href="{% url 'account:about-us' %}">profile</a>
             <a href="{% url 'account:about-us' %}">Medical Records</a>       
           {% endif %}
-          <form id="frm_logout" method="post" action="{% url 'account:logout' %}">
-	        {% csrf_token %}     
-	        <a href="javascript:$('#frm_logout').submit();" role="button">
-              Logout
-            </a>
-          </form>
+          
         {% else %}
           <a href="{% url 'account:registration' %}">SignUp</a>
           <a href="{% url 'account:login' %}">Login</a>
         {% endif %}
       </nav>
+      {% if user.is_authenticated %}
+        <form action="{% url "account:logout" %}" method="post"> 
+          <button class='mybtn' type="submit">Logout</button>
+          {% csrf_token %} 
+        </form>
+      {% endif %}
     </header>
     {% block content %}
     {% endblock %}
-    <section class="footer">
-      <div class="container">
-        <div class="col-wrapper">
-          <div class="col-1">
-              <div class="logo"><img src="{% static 'images/logo.svg' %}" alt="Health App Logo"><span>Sansa</span></div>
-          </div>
-          <div class="col-1">
-            <ul>
-              <li><a class="header" href="">More info</a></li>
-              <li><a href="">About Sansa</a></li>
-              <li><a href="">Terms and Condition</a></li>
-              <li><a href="">Frequently asked Questions</a></li>
-            </ul>
-          </div>
-          <div class="col-1">
-            <ul>
-              <li><a class="header" href="">Contact Us</a></li>
-              <li><a href="">kofiarhin@gmail.com</a></li>
-              <li><a href="">checkout projects</a></li>
-            </ul>
-          </div>
-          <div class="col-1">
-            <ul>
-              <li><a class="header" href="">Medical Advisor</a></li>
-              <li><a href="">Login</a></li>
-              <li><a href="">Dashboard</a></li>
-              <li><a href="">Become one</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="social-media">
-      <div class="container">
-        <div class="social-wrapper">
-          <h2 class="copyright">Copyright © 2025</h2>
-          <div class="icons"><i class="fas fa-envelope"></i><i class="fas fa-map-marker-alt"></i></div>
-          <div class="slug"><span>Made with Love By</span><img src="{% static 'images/logo.webp' %}" alt="Health App Logo"></div>
-        </div>
-      </div>
-    </section>
+    
   </body>
 </html>

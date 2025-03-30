@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.views import View
 from .forms import *
+from .models import User
 
 # Create your views here.
 
@@ -23,7 +24,7 @@ def contact(request):
 class RegisterView(View):
     form_class = RegisterForm
     initial = {"key": "value"}
-    template_name = "account/registration/register.html"
+    template_name = "registration/signup.html"
 
     def dispatch(self, request, *args, **kwargs):
         # will redirect to the home page if a user tries to access the register page while logged in
@@ -76,7 +77,7 @@ class RegisterView(View):
                 )
             messages.succcess(request, f"Account created for {username}")
             return redirect(to="account:login")
-        return render(request, self.template_name, {"form", form})
+        return render(request, self.template_name, {"form": form})
 
 
 class CustomLoginView(LoginView):

@@ -1,3 +1,4 @@
+from .models import User
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -75,13 +76,15 @@ class RegisterForm(UserCreationForm):
         widget=forms.RadioSelect(
             attrs={
                 "class": "form-check-input",
+                "name": "flexRadioDefault",
+                "id": "flexRadioDefault1"
             }
         ),
     )
 
     def clean_email(self):
         data = self.cleaned_data["email"]
-        if get_user_model.objects.filter(email=data).exists():
+        if User.objects.filter(email=data).exists():
             raise forms.ValidationError("Email Already in use.")
         return data
 
