@@ -1,3 +1,14 @@
-from fastapi import fastAPI
+from fastapi import FastAPI
 
-app = fastAPI()
+
+def create_application():
+    application = FastAPI()
+    return application
+
+
+app = create_application()
+
+
+@app.get("/")
+async def root():
+    return {"message": "Hi, I am Otienoh CJ. Awesome - My setup is done & working."}
