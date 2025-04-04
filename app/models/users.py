@@ -10,7 +10,7 @@ from sqlalchemy import (
     ForeignKey,
     Enum as SQLEnum,
 )
-from app.config.database import Base
+from config.database import Base
 from sqlalchemy.orm import mapped_column, relationship
 
 
