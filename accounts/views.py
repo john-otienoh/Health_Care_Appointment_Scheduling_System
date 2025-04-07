@@ -6,10 +6,12 @@ from rest_framework.decorators import api_view, permission_classes
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.permissions import IsAuthenticated
 from .models import CustomUser
-from .serializers import UserSerializer, ChangePasswordSerializer
+from .serializers import *
 from django.core.mail import send_mail
 from django.contrib.auth import update_session_auth_hash
 # from .signals import account_created
+from .renderers import UserRenderer
+from rest_framework.views import APIView
 
 # Create your views here.
 @api_view(["POST"])
@@ -85,25 +87,47 @@ def user_logout(request):
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
+# User Profile View Class 
+class UserProfileView(APIView):
+    renderer_classes = [UserRenderer]
+    permission_classes = [IsAuthenticated]
+    def get(self, request , format=None):
+        user = request.user 
+        serializer = UserProfileSerializer(user)
+        return Response(serializer.data,status=status.HTTP_200_OK)
 
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def change_password(request):
-    if request.method == "POST":
-        serializer = ChangePasswordSerializer(data=request.data)
+
+class UserChangePasswordView(APIView):
+    renderer_classes = [UserRenderer]
+    permission_classes = [IsAuthenticated]
+    def post (self,request,format=None):
+        serializer = UserChangePasswordSerializer(data=request.data,context={'user':request.user})
         if serializer.is_valid():
-            user = request.user
-            if user.check_password(serializer.data.get("old_password")):
-                user.set_password(serializer.data.get("new_password"))
-                user.save()
-                update_session_auth_hash(
-                    request, user
-                )  # To update session after password change
-                return Response(
-                    {"message": "Password changed successfully."},
-                    status=status.HTTP_200_OK,
-                )
-            return Response(
-                {"error": "Incorrect old password."}, status=status.HTTP_400_BAD_REQUEST
-            )
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"password changed successfully"} ,status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+
+
+        
+
+# User Reset Password Classes 
+# 1 ---> User Reset Password Request View 
+class ResetPasswordRequestView(APIView):
+    renderer_classes = [UserRenderer]
+    def post(self, request, format=None):
+        serializer = ResetPasswordRequestSerializer(data=request.data)
+        if serializer.is_valid():
+            return Response({"msg":"Reset Password's Link Sent, Please Check Your Email BOX."},status=status.HTTP_200_OK)
+        
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+# 2 ---> User Reset Password View 
+class ResetPasswordView(APIView):
+    renderer_classes = [UserRenderer]
+    def post(self, request ,uid, token, format=None):
+        serializer = ResetPasswordSerializer(data=request.data, context={"uid":uid,"token":token})
+        if serializer.is_valid():
+            return Response({"msg":"password reset successfully"},status=status.HTTP_200_OK)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
